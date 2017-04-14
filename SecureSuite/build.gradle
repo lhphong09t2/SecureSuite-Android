@@ -25,21 +25,9 @@ def versionPatch = 1
 def versionBuild = 0
 
 // Load keystore
-def keystorePropertiesFile = System.getProperty("user.home")+"/.gradle/keystore.properties"
-def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 
 android {
-    signingConfigs {
-        release {
-            keyAlias keystoreProperties['SS_keyAlias']
-            storeFile file(keystoreProperties['SS_storeFile'])
-            storePassword keystoreProperties['SS_storePassword']
-            keyPassword keystoreProperties['SS_keyPassword']
-        }
-        debug {
-        }
-    }
 
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -62,13 +50,11 @@ android {
             versionNameSuffix "-debug"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
         }
         release {
             debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            signingConfig signingConfigs.release
         }
     }
     lintOptions {
